@@ -15,9 +15,15 @@ const displayController = (() => {
     page.appendChild(display);
 })();
 
-const Player = (label, symbol) => {
-    const getName = () => // write an html input for getting the players name and have it map to name 
-    const getSymbol = () => // write an html input for getting the player symbol and have it map to symbol 
-}
+//const Player = (label, symbol) => {
+//    const getName // write an html input for getting the players name and have it map to name 
+ //   const getSymbol // write an html input for getting the player symbol and have it map to symbol 
 
+// Validations
+
+ let getPlayerOneName = document.querySelector('.playerOneName');
+ let getPlayerTwoName = document.querySelector('.playerTwoName');
+ let options = document.getElementsByClassName('.symbol');
+ let symbolX = document.querySelector('.x');
+ let symbolO = document.querySelector('.o');
 
