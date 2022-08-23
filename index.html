@@ -12,16 +12,16 @@
     <div class="container">
         <div class="header">Tic-Tac-Toe</div>
         <div class="instructions">Welcome to Tic-Tac-Toe, please fill out the form below to get started:</div>
-        <form class="form" action="">
+        <form class="form" action='return: false'>
             <div>Player 1 Name:</div>
-            <input type="text" class="playerOneName">
+            <input type="text" class="playerOneName" required>
             <div>Player 2 Name:</div>
-            <input type="text" class="playerTwoName">
+            <input type="text" class="playerTwoName" required>
             <div class="symbolSelect">
-                <div>Player 1 check this box <span><input type="radio"  name="symbol" class="x" class="symbol"></span> to be "X"</div>
-                <div>Player 1 check this box <span> <input type="radio" name="symbol" class="o" class="symbol"></span> to be "O"</div>
+                <div>Player 1 check this box <span><input type="radio"  name="symbol" class="x" class="symbol" value="x" required></span> to be "X"</div>
+                <div>Player 1 check this box <span> <input type="radio" name="symbol" class="o" class="symbol" value="o" required></span> to be "O"</div>
             </div>
-            <button class="beginGame" type="submit">Begin Game</button>
+            <button class="beginGame" type="button">Begin Game</button>
         </form>
     </div>
 </body>
