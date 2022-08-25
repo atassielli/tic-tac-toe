@@ -35,6 +35,7 @@ html {
     justify-content: center;
     align-content: center;
     height: 100vh;
+    display: none;
 }
 
 .boardSpace {

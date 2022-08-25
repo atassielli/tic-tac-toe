@@ -12,13 +12,45 @@ const displayController = (() => {
 
 let beginGame = document.querySelector('.beginGame');
 beginGame.addEventListener('click', () => {
-    console.log(getPlayerOneName.value)
-    console.log(getPlayerTwoName.value)
+    let player1 = Player(getPlayerOneName.value, valdiatePlayer1Symbol());
+    let player2 = Player(getPlayerTwoName.value, valdiatePlayer2Symbol());
     validateNames();
     valdiatePlayer1Symbol();
     valdiatePlayer2Symbol();
-    makePlayer();
+    displayBoard();
 })
+
+let form = document.querySelector('.form');
+let showboard = document.querySelector('.gameBoard');
+let instruction = document.querySelector('.instructions');
+let turnIndicator = 'Player 1 is Up, Select a Square'
+
+function displayBoard() {
+    form.style.cssText = 'display: none';
+    showboard.style.cssText = 'display: grid';
+    instruction.textContent = `${turnIndicator}'`
+}
+
+function changeTurn() {
+    if (turnIndicator = 'Player 1 is Up, Select a Square') {
+        turnIndicator = 'Player 2 is Up, Select a Square'
+    } else if ('Player 2 is Up, Select a Square') {
+        turnIndicator = 'Player 1 is Up, Select a Square'
+    }
+    instruction.textContent = `${turnIndicator}'`
+}
+
+let boardSpace = document.querySelectorAll('.boardSpace');
+boardSpace.forEach(space => {
+    space.addEventListener('click', function () {
+        if (turnIndicator = 'Player 1 is Up, Select a Square') {
+            this.textContent = valdiatePlayer1Symbol()
+        } else if ('Player 2 is Up, Select a Square') {
+            this.textContent = valdiatePlayer2Symbol()
+        }
+        changeTurn();
+    })
+});
 
 //Player Creation
 
@@ -27,12 +59,6 @@ const Player = (name, symbol) => {
     const getSymbol = symbol;
     return {getName, getSymbol}
 }
-
-function makePlayer () {
-    let player1 = Player(getPlayerOneName.value, valdiatePlayer1Symbol());
-    let player2 = Player(getPlayerTwoName.value, valdiatePlayer2Symbol());
-}
-
 
 // Validations
 
@@ -69,7 +95,7 @@ function makePlayer () {
  }
 
 
- //when you click begin game it needs to hide the form and bring up the board game
+ 
  //Change the instruction line to read the players name and state that it is their turn
- //When a square is clicked it takes the current players symbol and puts it on the square
+ //When a square is clicked it takes the current players symbol and puts it on the square - Issue with making new players using factory and having the players be out of scope
  //Possibly make each square into an object that holds a clicked property and a symbol property, this could run the game to not allow players to click a spot that has already been taken 
