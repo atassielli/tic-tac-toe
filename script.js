@@ -23,29 +23,30 @@ beginGame.addEventListener('click', () => {
 let form = document.querySelector('.form');
 let showboard = document.querySelector('.gameBoard');
 let instruction = document.querySelector('.instructions');
-let turnIndicator = 'Player 1 is Up, Select a Square'
+let turnIndicator;
 
 function displayBoard() {
     form.style.cssText = 'display: none';
     showboard.style.cssText = 'display: grid';
-    instruction.textContent = `${turnIndicator}'`
+    turnIndicator =`${getPlayerOneName.value} is Up, Select a Square`
+    instruction.textContent = `${turnIndicator}`
 }
 
 function changeTurn() {
-    if (turnIndicator = 'Player 1 is Up, Select a Square') {
-        turnIndicator = 'Player 2 is Up, Select a Square'
-    } else if ('Player 2 is Up, Select a Square') {
-        turnIndicator = 'Player 1 is Up, Select a Square'
+    if (turnIndicator === `${getPlayerOneName.value} is Up, Select a Square`) {
+        turnIndicator = `${getPlayerTwoName.value} is Up, Select a Square`
+    } else if (turnIndicator === `${getPlayerTwoName.value} is Up, Select a Square`) {
+        turnIndicator = `${getPlayerOneName.value} is Up, Select a Square`
     }
-    instruction.textContent = `${turnIndicator}'`
+    instruction.textContent = `${turnIndicator}`
 }
 
 let boardSpace = document.querySelectorAll('.boardSpace');
 boardSpace.forEach(space => {
     space.addEventListener('click', function () {
-        if (turnIndicator = 'Player 1 is Up, Select a Square') {
+        if (turnIndicator === `${getPlayerOneName.value} is Up, Select a Square`) {
             this.textContent = valdiatePlayer1Symbol()
-        } else if ('Player 2 is Up, Select a Square') {
+        } else if (turnIndicator === `${getPlayerTwoName.value} is Up, Select a Square`) {
             this.textContent = valdiatePlayer2Symbol()
         }
         changeTurn();
