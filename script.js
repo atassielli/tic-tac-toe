@@ -22,14 +22,14 @@ beginGame.addEventListener('click', () => {
 
 let form = document.querySelector('.form');
 let showboard = document.querySelector('.gameBoard');
-let instruction = document.querySelector('.instructions');
+let instructions = document.querySelector('.instructions');
 let turnIndicator;
 
 function displayBoard() {
     form.style.cssText = 'display: none';
     showboard.style.cssText = 'display: grid';
     turnIndicator =`${getPlayerOneName.value} is Up, Select a Square`
-    instruction.textContent = `${turnIndicator}`
+    instructions.textContent = `${turnIndicator}`
 }
 
 function changeTurn() {
@@ -38,7 +38,7 @@ function changeTurn() {
     } else if (turnIndicator === `${getPlayerTwoName.value} is Up, Select a Square`) {
         turnIndicator = `${getPlayerOneName.value} is Up, Select a Square`
     }
-    instruction.textContent = `${turnIndicator}`
+    instructions.textContent = `${turnIndicator}`
 }
 
 let boardSpace = document.querySelectorAll('.boardSpace');
@@ -49,9 +49,92 @@ boardSpace.forEach(space => {
         } else if (turnIndicator === `${getPlayerTwoName.value} is Up, Select a Square`) {
             this.textContent = valdiatePlayer2Symbol()
         }
+        winCheck();
         changeTurn();
     })
 });
+
+let one = document.querySelector('#one');
+let two = document.querySelector('#two');
+let three = document.querySelector('#three');
+let four = document.querySelector('#four');
+let five = document.querySelector('#five');
+let six = document.querySelector('#six');
+let seven = document.querySelector('#seven');
+let eight = document.querySelector('#eight');
+let nine = document.querySelector('#nine');
+
+function winCheck() {
+    if (one.textContent === 'O' && two.textContent === 'O' && three.textContent === 'O') {
+        console.log('O Win')
+        oWins()
+    } else if (one.textContent === 'O' && four.textContent === 'O' && seven.textContent === 'O') {
+        oWins()
+    } else if (one.textContent === 'O' && five.textContent === 'O' && nine.textContent === 'O') {
+        oWins()
+    } else if (two.textContent === 'O' && five.textContent === 'O' && eight.textContent === 'O') {
+        oWins()
+    } else if (three.textContent === 'O' && five.textContent === 'O' && seven.textContent === 'O') {
+        oWins()
+    } else if (three.textContent === 'O' && six.textContent === 'O' && nine.textContent === 'O') {
+        oWins()
+    } else if (four.textContent === 'O' && five.textContent === 'O' && six.textContent === 'O') {
+        oWins()
+    } else if (seven.textContent === 'O' && eight.textContent === 'O' && nine.textContent === 'O') {
+        oWins()
+    } else if (one.textContent === 'X' && four.textContent === 'X' && seven.textContent === 'X') {
+        xWins()
+    } else if (one.textContent === 'X' && five.textContent === 'X' && nine.textContent === 'X') {
+        xWins()
+    } else if (two.textContent === 'X' && five.textContent === 'X' && eight.textContent === 'X') {
+        xWins()
+    } else if (three.textContent === 'X' && five.textContent === 'X' && seven.textContent === 'X') {
+        xWins()
+    } else if (three.textContent === 'X' && six.textContent === 'X' && nine.textContent === 'X') {
+        xWins()
+    } else if (four.textContent === 'X' && five.textContent === 'X' && six.textContent === 'X') {
+        xWins()
+    } else if (seven.textContent === 'X' && eight.textContent === 'X' && nine.textContent === 'X') {
+        xWins()
+    } else if (one.textContent === 'X' && two.textContent === 'X' && three.textContent === 'X') {
+        xWins()
+    } else {
+        return
+    }
+}
+
+let winner = document.createElement('div');
+let header = document.querySelector('.header');
+
+function oWins () {
+    instructions.style.cssText = 'display: none';
+    winner.textContent = 'O Wins';
+    header.appendChild(winner)
+    gameOver();
+}
+
+function xWins () {
+    instructions.style.cssText = 'display: none';
+    winner.textContent = 'X Wins';
+    header.appendChild(winner)
+    gameOver();
+}
+
+function gameOver () {
+    let homePage = document.createElement('button');
+    homePage.textContent = "Home Page";
+    homePage.addEventListener('click', function () {
+        location.reload();
+    })
+    header.appendChild(homePage);
+    let playAgain = document.createElement('button')
+    playAgain.textContent = "Play Again";
+    playAgain.addEventListener('click', function () {
+        boardSpace.textContent = ''
+        displayBoard();
+    })
+    header.appendChild(playAgain);
+}
 
 //Player Creation
 
