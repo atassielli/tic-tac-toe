@@ -1,11 +1,6 @@
 //Game Controls
 
-const gameBoard = (() => {
-    const board = { 
-        entries: [],
-    };
-    return board.entries
-})();
+let gameBoard = [];
 
 const displayController = (() => {
 })();
@@ -49,8 +44,20 @@ boardSpace.forEach(space => {
         } else if (turnIndicator === `${getPlayerTwoName.value} is Up, Select a Square`) {
             this.textContent = valdiatePlayer2Symbol()
         }
+        gameBoard.push(this.textContent)
         winCheck();
         changeTurn();
+    })
+});
+boardSpace.forEach(space => {
+    space.addEventListener('mouseover', function () {
+        this.style.cssText = 'background-color: grey'
+    })
+});
+
+boardSpace.forEach(space => {
+    space.addEventListener('mouseout', function () {
+        this.style.cssText = 'background-color: white'
     })
 });
 
@@ -98,8 +105,8 @@ function winCheck() {
         xWins()
     } else if (one.textContent === 'X' && two.textContent === 'X' && three.textContent === 'X') {
         xWins()
-    } else {
-        return
+    } else if (gameBoard.length === 9) {
+        tie()
     }
 }
 
@@ -108,16 +115,42 @@ let header = document.querySelector('.header');
 
 function oWins () {
     instructions.style.cssText = 'display: none';
-    winner.textContent = 'O Wins';
+    winner.textContent = getOWinnerName()
+    winner.style.cssText = 'display: flex';
     header.appendChild(winner)
     gameOver();
 }
 
 function xWins () {
     instructions.style.cssText = 'display: none';
-    winner.textContent = 'X Wins';
+    winner.textContent = getXWinnerName()
+    winner.style.cssText = 'display: flex';
     header.appendChild(winner)
     gameOver();
+}
+
+function tie() {
+    instructions.style.cssText = 'display: none';
+    winner.textContent = 'Game ended in a Tie'
+    winner.style.cssText = 'display: flex';
+    header.appendChild(winner)
+    gameOver();
+}
+
+function getXWinnerName() {
+    if (valdiatePlayer1Symbol() === 'X') {
+        return `${getPlayerOneName.value} Wins!`
+    } else {
+        return `${getPlayerTwoName.value} Wins!`
+    }
+}
+
+function getOWinnerName() {
+    if (valdiatePlayer1Symbol() === 'O') {
+        return `${getPlayerOneName.value} Wins!`
+    } else {
+        return `${getPlayerTwoName.value} Wins!`
+    }
 }
 
 function gameOver () {
@@ -130,10 +163,17 @@ function gameOver () {
     let playAgain = document.createElement('button')
     playAgain.textContent = "Play Again";
     playAgain.addEventListener('click', function () {
-        boardSpace.textContent = ''
+        boardSpace.forEach(space => {
+            space.textContent = ''
+        })
+        instructions.style.cssText = 'display: flex';
+        this.style.cssText = 'display: none';
+        homePage.style.cssText = 'display: none';
+        winner.style.cssText = 'display: none';
         displayBoard();
     })
     header.appendChild(playAgain);
+    gameBoard = []
 }
 
 //Player Creation

@@ -48,3 +48,14 @@ html {
     align-items: center;
     font-size: 50px;
 }
+
+.footer {
+    display: flex;
+    margin-top: auto;
+}
+
+.img {
+    height: 15px;
+    width: 15px;
+    margin-left: 5px;
+}
