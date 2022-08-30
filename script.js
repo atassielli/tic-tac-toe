@@ -7,10 +7,12 @@ const displayController = (() => {
 
 let beginGame = document.querySelector('.beginGame');
 beginGame.addEventListener('click', () => {
-    let player1 = Player(getPlayerOneName.value, valdiatePlayer1Symbol());
-    let player2 = Player(getPlayerTwoName.value, valdiatePlayer2Symbol());
-    validateNames();
-    valdiatePlayer1Symbol();
+    if (validateNames() === 'error') {
+        return
+    };
+    if (valdiatePlayer1Symbol() === 'error') {
+        return
+    }
     valdiatePlayer2Symbol();
     displayBoard();
 })
@@ -194,6 +196,7 @@ const Player = (name, symbol) => {
  function validateNames() {
      if ((getPlayerOneName.value.length === 0) || (getPlayerTwoName.value.length === 0)) {
          alert('Please fill out player names before proceeding to the game');
+         return 'error'
      } else {
          return
      }
@@ -206,7 +209,7 @@ const Player = (name, symbol) => {
          return 'O'
     } else {
         alert('Please select a symbol before proceeding to the game')
-        return
+        return 'error'
     }
  }
 
@@ -220,6 +223,3 @@ const Player = (name, symbol) => {
 
 
  
- //Change the instruction line to read the players name and state that it is their turn
- //When a square is clicked it takes the current players symbol and puts it on the square - Issue with making new players using factory and having the players be out of scope
- //Possibly make each square into an object that holds a clicked property and a symbol property, this could run the game to not allow players to click a spot that has already been taken 
