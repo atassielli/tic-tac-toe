@@ -59,3 +59,10 @@ html {
     width: 15px;
     margin-left: 5px;
 }
+
+.playerOneName, .playerTwoName, button {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
