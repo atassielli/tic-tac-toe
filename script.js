@@ -41,10 +41,13 @@ function changeTurn() {
 let boardSpace = document.querySelectorAll('.boardSpace');
 boardSpace.forEach(space => {
     space.addEventListener('click', function () {
-        if (turnIndicator === `${getPlayerOneName.value} is Up, Select a Square`) {
+        if ((turnIndicator === `${getPlayerOneName.value} is Up, Select a Square`) && this.textContent === '') {
             this.textContent = valdiatePlayer1Symbol()
-        } else if (turnIndicator === `${getPlayerTwoName.value} is Up, Select a Square`) {
+        } else if ((turnIndicator === `${getPlayerTwoName.value} is Up, Select a Square`) && this.textContent === '') {
             this.textContent = valdiatePlayer2Symbol()
+        } else if (this.textContent != '') {
+            alert('This square has already been taken, please choose an empty square')
+            return
         }
         gameBoard.push(this.textContent)
         winCheck();
@@ -53,7 +56,11 @@ boardSpace.forEach(space => {
 });
 boardSpace.forEach(space => {
     space.addEventListener('mouseover', function () {
-        this.style.cssText = 'background-color: grey'
+        if (this.textContent === ''){
+            this.style.cssText = 'background-color: grey'
+        } else {
+            this.style.cssText = 'background-color: white'
+        }
     })
 });
 
